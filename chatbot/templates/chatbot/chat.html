@@ -1,0 +1,1060 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>한국공항공사 인사규정 챗봇</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 60px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .company-title {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .company-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .company-subtitle {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-profile-section {
+            background: white;
+            border-radius: 12px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+    
+        .user-profile-section:hover {
+            background: #f8f9fa;
+        }
+    
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+    
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: #f8f9fa;
+            border: 2px solid #e8eaed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    
+        .user-details {
+            flex: 1;
+            min-width: 0;
+        }
+    
+    
+    
+        .profile-actions {
+            display: none; /* 초기에는 숨김 */
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #eef2f6;
+        }
+    
+        .profile-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            margin-left: auto;
+        }
+    
+        .profile-btn:hover {
+            background: #1557b0;
+        }
+    
+        /* 확장된 상태 */
+        .user-profile-section.expanded {
+            padding: 16px;
+        }
+    
+        .user-profile-section.expanded .user-department {
+            display: block;
+        }
+    
+        .user-profile-section.expanded 
+        .profile-actions {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+    
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    
+        .text-truncate {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .logout-button {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            border: 1px solid #e1e6ff;
+            border-radius: 6px;
+            background: white;
+            color: #666;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .logout-button:hover {
+            background: #f8f9ff;
+            color: #1a73e8;
+            border-color: #1a73e8;
+        }
+
+        .container {
+            display: flex;
+            height: calc(100vh - 70px);
+            padding: 0;
+            .sidebar {
+                width: 250px;
+                background: white;
+                border-right: 1px solid #eee;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+        
+            .sidebar-content {
+                padding: 20px;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .sidebar-content h3 {
+                font-size: 14px;
+                color: #333;
+                font-weight: 600;
+                margin-bottom: 12px;
+                border-bottom: 2px solid #e1e6ff;
+                padding-bottom: 8px;
+            }
+            
+            .category-list {
+                list-style: none;
+                margin-bottom: 20px;
+            }
+            
+            .category-list li {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 14px;
+                color: #555;
+                padding: 8px 0;
+                cursor: pointer;
+                transition: all 0.2s ease;
+            }
+            
+            .category-list li:hover {
+                color: #1a73e8;
+            }
+            
+            .faq-link {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 14px;
+                color: #1a73e8;
+                text-decoration: none;
+                padding: 10px;
+                background: #f8f9ff;
+                border: 1px solid #e1e6ff;
+                border-radius: 8px;
+                transition: all 0.2s ease;
+            }
+            
+            .faq-link:hover {
+                background: #e8f0fe;
+                color: #1557b0;
+            }
+        
+            .profile-container {
+                padding: 20px;
+                border-top: 1px solid #eee;
+                margin-top: auto;
+            }
+        
+            .user-profile-section {
+                background: white;
+                border-radius: 12px;
+                padding: 16px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            }
+        
+            .user-basic-info {
+                display: flex;
+                flex-direction: column; /* 세로로 정렬 */
+                gap: 4px; /* 항목 간격 */
+            }
+            
+            .user-name-dept {
+                display: flex;
+                align-items: center;
+                gap: 5px; /* 이름과 부서 사이 간격 */
+                font-size: 14px;
+                font-weight: 500;
+                color: #333;
+                white-space: nowrap; /* 한 줄에 표시 */
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            .user-id {
+                font-size: 14px;
+                font-weight: 400;
+                color: #555;
+                display: none; /* 초기에는 숨김 */
+                margin-top: 4px; /* 이름 아래 간격 */
+            }
+            
+            .user-id-dot {
+                display: none; /* 사번 구분점도 초기에는 숨김 */
+                color: #333;
+            }
+            
+
+            .user-avatar {
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                overflow: hidden;
+                flex-shrink: 0;
+                background: #f8f9fa;
+                border: 2px solid #e8eaed;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        
+            .user-avatar img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        
+            .user-avatar i {
+                font-size: 24px;
+                color: #dadce0;
+            }
+        
+        
+            .profile-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                padding: 8px 16px;
+                background: #1a73e8;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                font-size: 12px;
+                text-decoration: none;
+                transition: all 0.2s ease;
+                width: fit-content;
+            }
+        
+            .profile-btn:hover {
+                background: #1557b0;
+            }
+        
+            .text-truncate {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            gap: 30px;
+            height: calc(100vh - 80px);
+            max-width: 1600px;
+            margin: 0 auto;
+        }       
+        .chatbot-section {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            padding: 24px;
+        }
+
+        .chat-header {
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f0f2f5;
+            padding-bottom: 15px;
+        }
+
+        .chat-header h4 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #1a73e8;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .chat-guide {
+            background: linear-gradient(145deg, #f0f7ff 0%, #e8f0fe 100%); /* 부드러운 그라데이션 */
+            border-radius: 12px; /* 둥근 테두리 */
+            padding: 20px 24px; /* 여백 조정 */
+            margin-bottom: 24px;
+            border: 1px solid rgba(26, 115, 232, 0.15); /* 테두리 색상 조정 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* 가벼운 그림자 효과 */
+            display: flex; /* 아이콘과 텍스트 정렬 */
+            align-items: center;
+            gap: 16px; /* 아이콘과 텍스트 사이 간격 */
+            color: #333; /* 텍스트 색상 */
+        }
+        
+        .chat-guide i {
+            font-size: 24px; /* 아이콘 크기 */
+            color: #1a73e8; /* 아이콘 색상 */
+        }
+        
+        .chat-guide-content {
+            flex: 1; /* 남은 공간 차지 */
+        }
+        
+        .chat-guide h5 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1a73e8; /* 강조된 색상 */
+        }
+        
+        .chat-guide ul {
+            list-style: none; /* 리스트 스타일 제거 */
+            margin: 0;
+            padding: 0;
+        }
+        
+        .chat-guide li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #555; /* 설명 텍스트 색상 */
+        }
+        
+        .chat-guide li::before {
+            content: "•"; /* 간단한 점 추가 */
+            color: #1a73e8;
+            font-size: 18px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            margin: 15px 0;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            max-width: 80%;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .user-message {
+            margin-left: auto;
+            background: #1a73e8;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border-bottom-right-radius: 4px;
+        }
+
+        .bot-message {
+            margin-right: auto;
+            background: white;
+            color: #333;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border-bottom-left-radius: 4px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .chat-input-area {
+            margin-top: 20px;
+            padding: 16px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+        }
+
+        #chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            resize: none;
+            min-height: 48px;
+            max-height: 120px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+        .loading {
+            display: none; /* 초기에는 숨김 */
+            margin: 0;
+            padding: 0;
+            height: 0;
+            line-height: 0;
+        }
+        #chat-input:focus {
+            outline: none;
+            border-color: #1a73e8;
+            box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.1);
+        }
+
+        #send-button {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #send-button:hover {
+            background: #1557b0;
+            transform: translateY(-1px);
+        }
+
+        .notice-section {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            padding: 0;
+            margin-bottom: 0;
+            overflow: visible;
+        }
+        
+        .NewsTab {
+            margin-bottom: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        /* 부모 컨테이너의 여백도 제거 */
+        .NewsTabCont {
+            margin: 0; /* 부모 요소의 여백 제거 */
+            padding: 0; /* 부모 요소의 패딩 제거 */
+        }
+        .NewsTab button {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1a73e8;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .newsSlider {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .NewsTab button i {
+            font-size: 14px;
+        }
+        
+        .item.News {
+            border-bottom: 1px solid #eee;
+        }
+        
+        
+        .item.News a {
+            display: block;
+            padding: 12px 16px;
+            background: #fff;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .item.News a:hover {
+            background: #f8f9fa;
+        }
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            min-width: 160px;
+        }
+
+        
+        .Publisher {
+            color: #444;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .news-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .Category {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #e8f0fe;
+            color: #1a73e8;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+        
+        .Day {
+            color: #666;
+            font-size: 12px;
+            min-width: 80px;
+        }
+        
+        .Title {
+            color: #333;
+            font-size: 13px;
+            font-weight: 400;
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+        }
+        
+        .loading i {
+            margin-right: 8px;
+            color: #1a73e8;
+        }
+        
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+        
+        .error {
+            text-align: center;
+            padding: 20px;
+            color: #dc3545;
+            background: #fff5f5;
+            border-radius: 12px;
+        }
+
+        .item.Notice {
+            margin-bottom: 12px;
+        }
+
+        .item.Notice a {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .item.Notice a:hover {
+            background: #f0f7ff;
+            border-color: #e8f0fe;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(26, 115, 232, 0.08);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes typingBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                width: 50px;
+            }
+            
+            .company-name {
+                font-size: 14px;
+            }
+            
+            .company-subtitle {
+                font-size: 12px;
+            }
+
+            .user-profile-section {
+                padding: 0.75rem;
+                margin: 0.75rem;
+            }
+            
+            .user-avatar {
+                width: 2rem;
+                height: 2rem;
+            }
+            
+            .user-name {
+                font-size: 0.8rem;
+            }
+            
+            .user-department {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .user-profile-section {
+                padding: 0.5rem;
+                margin: 0.5rem;
+            }
+            
+            .action-button span {
+                font-size: 0.75rem;
+            }
+        }
+
+        .loading-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.8);
+            z-index: 1000;
+        }
+
+        .loading-message {
+            background: white;
+            padding: 20px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+            color: #1a73e8;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .error-message {
+            text-align: center;
+            padding: 20px;
+            color: #dc3545;
+            background: #fff5f5;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            background: #f8f9fa;
+        }
+    </style>
+</head><body>
+    <header class="header">
+        <div class="header-left">
+            <img src="{% static 'KAC.png' %}" alt="한국공항공사 로고" class="logo">
+            <div class="company-title">
+                <span class="company-name">한국공항공사</span>
+                <span class="company-subtitle">인사규정 챗봇 서비스</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="user-info">
+                <span class="user-info-name">{{ user.last_name }}{{ user.first_name }}</span>
+                <span class="user-info-dot">•</span>
+                <span class="user-info-id">{{ user.username }}</span>
+                <span class="user-info-dot">•</span>
+                <span class="user-info-department">{{ user.profile.department }}</span>
+            </div>
+            <button class="logout-button" onclick="location.href='{% url 'logout' %}'">
+                <i class="fas fa-sign-out-alt"></i>
+                로그아웃
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="sidebar">
+            <!-- 상단 카테고리 및 FAQ -->
+            <div class="sidebar-content">
+                <h3>주요 카테고리</h3>
+                <ul class="category-list">
+                    <li>
+                        <i class="fas fa-user"></i>
+                        <span>인사</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-database"></i>
+                        <span>보수</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-award"></i>
+                        <span>상벌</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-calendar-check"></i>
+                        <span>복무</span>
+                    </li>
+                </ul>
+        
+                <h3>자주 묻는 질문</h3>
+                <a href="#" class="faq-link">
+                    <i class="fas fa-question-circle"></i>
+                    FAQ 바로가기
+                </a>
+            </div>
+        
+            <div class="user-profile-section" id="profileSection">
+                <!-- 기본 상태 -->
+                <div class="user-info">
+                    <div class="user-avatar">
+                        {% if user.profile.profile_image and user.profile.profile_image.url != '/media/profile_images/default.png' %}
+                            <img src="{{ user.profile.profile_image.url }}" alt="프로필 이미지">
+                        {% else %}
+                            <i class="fas fa-user"></i>
+                        {% endif %}
+                    </div>
+                    <div class="user-basic-info" id="basicInfo">
+                        <!-- 이름과 부서 -->
+                        <div class="user-name-dept">
+                            <span class="user-name">{{ user.last_name }}{{ user.first_name }}</span>
+                            <span class="dot">•</span>
+                            <span class="user-department">{{ user.profile.department }}</span>
+                        </div>
+                        <!-- 사번 -->
+                        <div class="user-id" id="userId" style="display: none;">
+                            {{ user.username }}
+                        </div>
+                    </div>
+                </div>
+            
+            
+                <div class="profile-actions">
+                    <a href="{% url 'my_page' %}" class="profile-btn">
+                        <i class="fas fa-user-cog"></i>
+                        <span>마이페이지</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="notice-section">
+    <div class="NewsTab">
+        <button class="on" data-category="news">
+            <i class="fas fa-newspaper"></i>
+            한국공항공사 보도자료
+        </button>
+    </div>
+    <div class="NewsTabCont on" id="news-tab">
+        <div class="newsSlider"></div>
+            <div class="loading"></div>
+    </div>
+</div>
+
+            <div class="chatbot-section">
+                <div class="chat-header">
+                    <h4>
+                        <i class="fas fa-robot"></i>
+                        인사규정 문의하기
+                    </h4>
+                </div>
+                
+                <div class="chat-guide">
+                    <i class="fas fa-lightbulb"></i> <!-- 아이콘 추가 -->
+                    <div class="chat-guide-content">
+                        <h5>💡 챗봇 이용 안내</h5>
+                        <ul>
+                            <li>인사규정과 관련된 질문을 자유롭게 입력해주세요.</li>
+                            <li>정확한 답변을 위해 구체적인 질문을 해주시면 좋습니다.</li>
+                            <li>예시) "연차 휴가는 어떻게 신청하나요?", "육아휴직 기간은 얼마인가요?"</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="chat-messages" id="chat-messages"></div>
+
+                <div class="chat-input-area">
+                    <div class="input-wrapper">
+                        <textarea 
+                            id="chat-input" 
+                            placeholder="질문을 입력해주세요..."
+                            rows="1"
+                        ></textarea>
+                        <button id="send-button">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        // 챗봇 기능 초기화
+        function initializeChatbot() {
+            const chatInput = document.getElementById('chat-input');
+            const sendButton = document.getElementById('send-button');
+            const chatMessages = document.getElementById('chat-messages');
+
+            function sendMessage() {
+                const message = chatInput.value.trim();
+                if (!message) return;
+            
+                addMessage('user', message);
+                chatInput.value = '';
+            
+                // API 호출 경로 수정
+                fetch('/api/chat/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCSRFToken()
+                    },
+                    body: JSON.stringify({ message: message })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.response) {
+                        const formattedResponse = data.response.replace(/\n/g, '<br>');
+                        addMessage('bot', formattedResponse);
+                    } else {
+                        addMessage('bot', '죄송합니다. 응답을 받지 못했습니다.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    addMessage('bot', '죄송합니다. 오류가 발생했습니다.');
+                });
+            }
+            
+
+            // 메시지 추가 함수
+            function addMessage(type, content) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${type}-message`;
+                
+                if (type === 'bot') {
+                    const botWrapper = document.createElement('div');
+                    botWrapper.className = 'bot-message-wrapper';
+                    
+                    const avatar = document.createElement('div');
+                    avatar.className = 'bot-avatar';
+                    avatar.innerHTML = '<i class="fas fa-robot"></i>';
+                    
+                    const contentDiv = document.createElement('div');
+                    contentDiv.className = 'message-content';
+                    contentDiv.innerHTML = content;
+                    
+                    botWrapper.appendChild(avatar);
+                    botWrapper.appendChild(contentDiv);
+                    messageDiv.appendChild(botWrapper);
+                } else {
+                    messageDiv.innerHTML = content;
+                }
+                
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            // 이벤트 리스너 등록
+            sendButton.addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+        }
+
+        // CSRF 토큰 가져오기
+        function getCSRFToken() {
+            const cookies = document.cookie.split(';');
+            for (let cookie of cookies) {
+                const [name, value] = cookie.trim().split('=');
+                if (name === 'csrftoken') return value;
+            }
+            return '';
+        }
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}.${month}.${day}`;
+        }
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // 챗봇 기능 초기화
+            initializeChatbot();
+            
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileSection = document.getElementById('profileSection');
+            let isExpanded = false;
+    
+            profileSection.addEventListener('click', function(e) {
+                // 마이페이지 링크 클릭 시 이벤트 전파 중단
+                if (e.target.closest('.profile-btn')) {
+                    return;
+                }
+    
+                isExpanded = !isExpanded;
+                this.classList.toggle('expanded', isExpanded);
+            });
+    
+            // 외부 클릭 시 프로필 섹션 축소
+            document.addEventListener('click', function(e) {
+                if (!profileSection.contains(e.target) && isExpanded) {
+                    isExpanded = false;
+                    profileSection.classList.remove('expanded');
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const profileSection = document.getElementById('profileSection');
+            const userId = document.getElementById('userId');
+            let isExpanded = false;
+        
+            profileSection.addEventListener('click', function () {
+                isExpanded = !isExpanded;
+        
+                // 확장 상태 시 사번 표시
+                if (isExpanded) {
+                    userId.style.display = 'block';
+                } else {
+                    userId.style.display = 'none';
+                }
+            });
+        });
+    </script>
+    <script src="{% static 'js/news.js' %}"></script>
+</body>
+</html>
