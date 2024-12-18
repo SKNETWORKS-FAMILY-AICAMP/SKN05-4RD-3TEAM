@@ -130,16 +130,41 @@
                 <span class="user-info-department">{{ user.profile.department }}</span>
                 {% endif %}
             </div>
-            <button class="logout-button" onclick="location.href='{% url 'logout' %}'">
-                <i class="fas fa-sign-out-alt"></i>
-                로그아웃
-            </button>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="logout-button">
+                    <i class="fas fa-sign-out-alt"></i>
+                    로그아웃
+                </button>
+            </form>
         </div>
     </header>
 
     <div class="main-content">
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
         {% block content %}
         {% endblock %}
     </div>
+
+    <script>
+        // 알림 메시지 자동 제거
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                var alerts = document.querySelectorAll('.alert');
+                alerts.forEach(function(alert) {
+                    alert.style.display = 'none';
+                });
+            }, 3000); // 3초 후 메시지 숨김
+        });
+    </script>
 </body>
 </html> 

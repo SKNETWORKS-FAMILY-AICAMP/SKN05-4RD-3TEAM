@@ -88,3 +88,6 @@ LOGIN_REDIRECT_URL = 'chat'
 
 # 기본 자동 필드 설정
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# settings.py
+LOGOUT_REDIRECT_URL = '/login/'  # 로그아웃 후 리디렉션할 URL
