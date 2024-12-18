@@ -393,7 +393,7 @@ from .utils.kac_crawler import KACCrawler
 def get_news(request):
     try:
         crawler = KACCrawler()
-        count = int(request.GET.get('count', 4))
+        count = int(request.GET.get('count', 3))
         
         # press 카테고리의 뉴스를 가져옴
         news = crawler.get_notices('press', page=1, count=count)

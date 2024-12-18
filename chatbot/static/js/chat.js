@@ -1,12 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // 필요한 DOM 요소들 가져오기
     const chatInput = document.getElementById('chat-input');
     const sendButton = document.getElementById('send-button');
     const chatMessages = document.getElementById('chat-messages');
     const helpButton = document.getElementById('helpButton');
     const chatGuide = document.querySelector('.chat-guide');
-    const closeChatGuide = document.getElementById('closeChatGuide'); // 헤더 영역에 배치한 X 버튼
+    const closeChatGuide = document.getElementById('closeChatGuide');
     const profileSection = document.getElementById('profileSection');
     const userId = document.getElementById('userId');
+    const copyButton = document.getElementById('copy-address');
+    const copyNotice = document.getElementById('copy-notice');
+    const categoryLinks = document.querySelectorAll('.category-list a');
 
     // 필수 요소 확인
     if (!helpButton || !chatInput || !sendButton || !chatMessages || !chatGuide || !closeChatGuide) {
@@ -14,12 +18,90 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
+    // 채팅 가이드 관련 상태와 이벤트 처리
     let isGuideVisible = false;
 
     helpButton.addEventListener('click', function() {
         isGuideVisible = !isGuideVisible;
-        
-        if (isGuideVisible) {
+        toggleGuideVisibility(chatGuide, isGuideVisible);
+    });
+
+    closeChatGuide.addEventListener('click', function() {
+        isGuideVisible = false;
+        toggleGuideVisibility(chatGuide, false);
+    });
+
+    // 메시지 전송 관련 이벤트 리스너
+    sendButton.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+
+    // 프로필 섹션 관련 상태와 이벤트 처리
+    let isExpanded = false;
+
+    profileSection.addEventListener('click', function(e) {
+        if (e.target.closest('.profile-btn')) {
+            return;
+        }
+
+        isExpanded = !isExpanded;
+        this.classList.toggle('expanded', isExpanded);
+
+        if (userId) {
+            userId.style.display = isExpanded ? 'block' : 'none';
+        }
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!profileSection.contains(e.target) && isExpanded) {
+            isExpanded = false;
+            profileSection.classList.remove('expanded');
+            if (userId) userId.style.display = 'none';
+        }
+    });
+
+    // 주소 복사 기능
+    if (copyButton) {
+        copyButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            const address = copyButton.innerText.trim();
+            navigator.clipboard.writeText(address).then(() => {
+                copyNotice.style.display = 'block';
+                setTimeout(() => {
+                    copyNotice.style.display = 'none';
+                }, 2000);
+            }).catch(err => {
+                console.error('주소 복사 실패:', err);
+            });
+        });
+    }
+
+    categoryLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const fileUrl = this.href;
+            const fileName = this.getAttribute('download');
+
+            // HWP 파일 다운로드 시작
+            const anchor = document.createElement('a');
+            anchor.href = fileUrl;
+            anchor.download = fileName;
+            anchor.click();
+        });
+    });
+
+
+    // 뉴스 업데이트 초기화
+    updateSidebarNews();
+    setInterval(updateSidebarNews, 300000);
+
+    // 채팅 가이드 표시/숨김 처리 함수
+    function toggleGuideVisibility(chatGuide, isVisible) {
+        if (isVisible) {
             chatGuide.style.display = 'flex';
             setTimeout(() => {
                 chatGuide.style.opacity = '1';
@@ -30,17 +112,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 chatGuide.style.display = 'none';
             }, 300);
         }
-    });
+    }
 
-    closeChatGuide.addEventListener('click', function() {
-        // X 버튼 클릭 시 가이드 닫기
-        isGuideVisible = false;
-        chatGuide.style.opacity = '0';
-        setTimeout(() => {
-            chatGuide.style.display = 'none';
-        }, 300);
-    });
-
+    // 메시지 전송 함수
     function sendMessage() {
         const message = chatInput.value.trim();
         if (!message) return;
@@ -71,6 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // 메시지 추가 함수
     function addMessage(type, content) {
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${type}-message`;
@@ -98,37 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    sendButton.addEventListener('click', sendMessage);
-    chatInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            sendMessage();
-        }
-    });
-
-    let isExpanded = false;
-
-    profileSection.addEventListener('click', function(e) {
-        if (e.target.closest('.profile-btn')) {
-            return;
-        }
-
-        isExpanded = !isExpanded;
-        this.classList.toggle('expanded', isExpanded);
-
-        if (userId) {
-            userId.style.display = isExpanded ? 'block' : 'none';
-        }
-    });
-
-    document.addEventListener('click', function(e) {
-        if (!profileSection.contains(e.target) && isExpanded) {
-            isExpanded = false;
-            profileSection.classList.remove('expanded');
-            if (userId) userId.style.display = 'none';
-        }
-    });
-
+    // 뉴스 업데이트 함수
     function updateSidebarNews() {
         const newsList = document.getElementById('newsList');
         if (!newsList) {
@@ -166,11 +211,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 newsList.innerHTML = `<div class="error">뉴스를 불러오는데 실패했습니다.</div>`;
             });
     }
-    
-    updateSidebarNews();
-    setInterval(updateSidebarNews, 300000);
 });
 
+// CSRF 토큰 가져오기 함수
 function getCSRFToken() {
     const cookies = document.cookie.split(';');
     for (let cookie of cookies) {

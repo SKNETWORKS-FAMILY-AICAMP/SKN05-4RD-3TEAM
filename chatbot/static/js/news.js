@@ -1,3 +1,4 @@
+// 날짜 포맷팅 유틸리티 함수
 window.formatDate = function(dateString) {
     const date = new Date(dateString);
     const year = date.getFullYear();
@@ -6,24 +7,23 @@ window.formatDate = function(dateString) {
     return `${year}.${month}.${day}`;
 };
 
-// 뉴스 제목을 구분자 기준으로 나누는 함수
+// 뉴스 제목 파싱 함수
 function parseNewsTitle(title) {
-    const separators = /\s*[|\-–—]\s*(?=[^|\-–—]*$)/; // 다양한 구분자 처리
+    const separators = /\s*[|\-–—]\s*(?=[^|\-–—]*$)/;
     const parts = title.split(separators);
     
-    if (parts.length > 1) {
-        return {
+    return parts.length > 1 
+        ? {
             title: parts[0].trim(),
             publisher: parts[parts.length - 1].trim()
+        }
+        : {
+            title: title,
+            publisher: 'Google News'
         };
-    }
-    
-    return {
-        title: title,
-        publisher: 'Google News' // 구분자가 없을 경우 기본 값
-    };
 }
 
+// 뉴스 로딩 및 렌더링 함수
 function loadGoogleNews(container = '#newsList', isSidebar = true) {
     const newsContainer = document.querySelector(container);
     if (!newsContainer) {
@@ -31,7 +31,7 @@ function loadGoogleNews(container = '#newsList', isSidebar = true) {
         return;
     }
 
-    // 로딩 표시
+    // 로딩 상태 표시
     newsContainer.innerHTML = `
         <div class="loading">
             <i class="fas fa-spinner fa-spin"></i> 보도자료를 불러오는 중...
@@ -50,23 +50,7 @@ function loadGoogleNews(container = '#newsList', isSidebar = true) {
             }
 
             if (isSidebar) {
-                const newsItems = data.news.slice(0, 4);
-                const newsHTML = newsItems.map(news => {
-                    const parsedTitle = parseNewsTitle(news.title);
-                    return `
-                        <div class="news-item">
-                            <a href="${news.link}" target="_blank">
-                                <span class="news-title">${parsedTitle.title}</span>
-                                <div class="news-meta">
-                                    <span class="news-date">${window.formatDate(news.pubDate)}</span>
-                                    <span class="news-publisher">${parsedTitle.publisher}</span>
-                                </div>
-                            </a>
-                        </div>
-                    `;
-                }).join('');
-
-                newsContainer.innerHTML = newsHTML;
+                renderSidebarNews(newsContainer, data.news);
             }
         })
         .catch(error => {
@@ -75,17 +59,37 @@ function loadGoogleNews(container = '#newsList', isSidebar = true) {
         });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    // 사이드바 뉴스만 로드
+// 사이드바 뉴스 렌더링 함수
+function renderSidebarNews(container, newsData) {
+    const newsItems = newsData.slice(0, 3); // 최대 4개 항목만 표시
+    const newsHTML = newsItems.map(news => {
+        const parsedTitle = parseNewsTitle(news.title);
+        return `
+            <div class="news-item">
+                <a href="${news.link}" target="_blank">
+                    <span class="news-title">${parsedTitle.title}</span>
+                    <div class="news-meta">
+                        <span class="news-date">${window.formatDate(news.pubDate)}</span>
+                        <span class="news-publisher">${parsedTitle.publisher}</span>
+                    </div>
+                </a>
+            </div>
+        `;
+    }).join('');
+
+    container.innerHTML = newsHTML;
+}
+
+// 초기화 및 자동 업데이트 설정
+document.addEventListener('DOMContentLoaded', function() {
     const sidebarContainer = document.querySelector('#newsList');
     if (sidebarContainer) {
-        console.log('사이드바 뉴스 로드 시도');
+        console.log('사이드바 뉴스 로드 시작');
         loadGoogleNews('#newsList', true);
+        
+        // 5분마다 자동 업데이트
+        setInterval(() => {
+            loadGoogleNews('#newsList', true);
+        }, 300000);
     }
-
-
-    // 5분마다 자동 업데이트
-    setInterval(() => {
-        if (sidebarContainer) loadGoogleNews('#newsList', true);
-    }, 300000);
 });
