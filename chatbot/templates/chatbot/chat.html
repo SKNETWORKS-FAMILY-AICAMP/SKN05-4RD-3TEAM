@@ -134,30 +134,94 @@
         .profile-btn:hover {
             background: #1557b0;
         }
-    
-        /* 확장된 상태 */
-        .user-profile-section.expanded {
-            padding: 16px;
+        /* 프로필 섹션 기본 스타일 */
+        .header-right .user-profile-section {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            border-radius: 8px;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 200px;
+            height: 48px;
         }
-    
-        .user-profile-section.expanded .user-department {
-            display: block;
+
+
+        .header-right .user-profile-section.expanded {
+            min-width: 220px;
         }
-    
-        .user-profile-section.expanded 
-        .profile-actions {
-            display: block;
-            animation: fadeIn 0.3s ease;
+
+        /* 프로필 액션 버튼 컨테이너 */
+        .header-right .profile-actions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            padding: 8px;
+            background: white;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
         }
-    
+
+        .header-right .user-profile-section.expanded .profile-actions {
+            display: flex;
+        }
+
+        /* 버튼 스타일 */
+        .header-right .profile-btn,
+        .header-right .logout-button {
+            width: 100%;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            padding: 0 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .header-right .profile-btn i,
+        .header-right .logout-button i {
+            font-size: 12px;
+        }
+
+        .header-right .profile-btn {
+            background: #1a73e8;
+            color: white;
+        }
+
+        .header-right .logout-button {
+            background: white;
+            color: #666;
+            border: 1px solid #e1e6ff;
+        }
+
+        .header-right .profile-btn:hover {
+            background: #1557b0;
+        }
+
+        .header-right .logout-button:hover {
+            background: #f8f9ff;
+            color: #1a73e8;
+            border-color: #1a73e8;
+        }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(-10px);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
             }
         }
     
@@ -199,7 +263,12 @@
                 display: flex;
                 flex-direction: column;
             }
-        
+            .news-publisher {
+                color: #555;
+                font-size: 11px;
+                font-weight: 400;
+                margin-left: 8px; /* 날짜와 간격 추가 */
+            }
             .sidebar-content {
                 padding: 20px;
                 border-bottom: 1px solid #eee;
@@ -213,7 +282,113 @@
                 border-bottom: 2px solid #e1e6ff;
                 padding-bottom: 8px;
             }
-            
+            /* 사이드바 섹션 스타일 */
+            .sidebar-section {
+                padding: 20px;
+                border-bottom: 1px solid #eee;
+            }
+
+            /* 뉴스 섹션 스타일 */
+            .news-section {
+                flex: 1;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .news-section h3 {
+                font-size: 14px;
+                color: #333;
+                font-weight: 600;
+                margin-bottom: 16px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .news-section h3 i {
+                color: #1a73e8;
+            }
+
+            .news-container {
+                flex: 1;
+                overflow-y: auto;
+            }
+
+            .news-list {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            /* 뉴스 아이템 스타일 */
+            .news-item {
+                padding: 12px;
+                background: #f8f9fa;
+                border-radius: 8px;
+                transition: all 0.2s ease;
+            }
+
+            .news-item:hover {
+                background: #f0f7ff;
+                transform: translateX(4px);
+            }
+
+            .news-item a {
+                text-decoration: none;
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .news-title {
+                font-size: 13px;
+                color: #333;
+                font-weight: 500;
+                line-height: 1.4;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            .news-meta {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 11px;
+                color: #666;
+            }
+
+            .news-category {
+                color: #1a73e8;
+                background: #e8f0fe;
+                padding: 2px 6px;
+                border-radius: 4px;
+                font-weight: 500;
+            }
+
+            .news-date {
+                color: #888;
+            }
+
+            /* 스크롤바 스타일 */
+            .news-container::-webkit-scrollbar {
+                width: 4px;
+            }
+
+            .news-container::-webkit-scrollbar-track {
+                background: #f1f1f1;
+            }
+
+            .news-container::-webkit-scrollbar-thumb {
+                background: #ccc;
+                border-radius: 4px;
+            }
+
+            .news-container::-webkit-scrollbar-thumb:hover {
+                background: #999;
+            }
             .category-list {
                 list-style: none;
                 margin-bottom: 20px;
@@ -268,7 +443,7 @@
         
             .user-basic-info {
                 display: flex;
-                flex-direction: column; /* 세로로 정렬 */
+                flex-direction: column; /* 세로 정렬 */
                 gap: 4px; /* 항목 간격 */
             }
             
@@ -347,7 +522,118 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
+            /* 헤더의 프로필 섹션 스타일 */
+            .header-right {
+                position: relative;
+            }
 
+            .header-right .user-profile-section {
+                background: white;
+                border-radius: 12px;
+                padding: 8px 12px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                transition: all 0.3s ease;
+                cursor: pointer;
+                min-width: 200px;
+            }
+
+            .header-right .user-info {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .header-right .user-avatar {
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                overflow: hidden;
+                flex-shrink: 0;
+                background: #f8f9fa;
+                border: 2px solid #e8eaed;
+            }
+
+            .header-right .user-basic-info {
+                flex: 1;
+                min-width: 0;
+            }
+
+            .header-right .user-name-dept {
+                font-size: 13px;
+                font-weight: 500;
+                color: #333;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+            }
+
+            .header-right .profile-actions {
+                display: none;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                background: white;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                padding: 8px;
+                margin-top: 8px;
+                min-width: 200px;
+                z-index: 1000;
+            }
+
+            .header-right .user-profile-section.expanded .profile-actions {
+                display: flex;
+                gap: 8px;
+                flex-direction: column;
+            }
+
+            .header-right .profile-btn,
+            .header-right .logout-button {
+                width: 100%;
+                padding: 8px 12px;
+                border-radius: 6px;
+                font-size: 13px;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                justify-content: center;
+            }
+
+            .header-right .profile-btn {
+                background: #1a73e8;
+                color: white;
+                border: none;
+                text-decoration: none;
+            }
+
+            .header-right .profile-btn:hover {
+                background: #1557b0;
+            }
+
+            .header-right .logout-button {
+                background: white;
+                color: #666;
+                border: 1px solid #e1e6ff;
+            }
+
+            .header-right .logout-button:hover {
+                background: #f8f9ff;
+                color: #1a73e8;
+                border-color: #1a73e8;
+            }
+
+            /* 프로필 액션 메뉴 화살표 */
+            .header-right .profile-actions:before {
+                content: '';
+                position: absolute;
+                top: -6px;
+                right: 20px;
+                width: 12px;
+                height: 12px;
+                background: white;
+                transform: rotate(45deg);
+                box-shadow: -2px -2px 4px rgba(0,0,0,0.05);
+            }
         .main-content {
             flex: 1;
             display: flex;
@@ -384,50 +670,51 @@
         }
 
         .chat-guide {
-            background: linear-gradient(145deg, #f0f7ff 0%, #e8f0fe 100%); /* 부드러운 그라데이션 */
-            border-radius: 12px; /* 둥근 테두리 */
-            padding: 20px 24px; /* 여백 조정 */
-            margin-bottom: 24px;
-            border: 1px solid rgba(26, 115, 232, 0.15); /* 테두리 색상 조정 */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* 가벼운 그림자 효과 */
-            display: flex; /* 아이콘과 텍스트 정렬 */
-            align-items: center;
-            gap: 16px; /* 아이콘과 텍스트 사이 간격 */
-            color: #333; /* 텍스트 색상 */
+            display: none;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 12px 0;
+            align-items: flex-start;
+            gap: 12px;
+            transition: opacity 0.3s ease;
+            opacity: 0;
         }
-        
+
         .chat-guide i {
-            font-size: 24px; /* 아이콘 크기 */
-            color: #1a73e8; /* 아이콘 색상 */
+            color: #1a73e8;
+            font-size: 20px;
+            margin-top: 4px;
         }
-        
+
         .chat-guide-content {
-            flex: 1; /* 남은 공간 차지 */
+            flex: 1;
         }
-        
+
         .chat-guide h5 {
             font-size: 16px;
             font-weight: 600;
-            margin-bottom: 8px;
-            color: #1a73e8; /* 강조된 색상 */
+            margin-bottom: 12px;
+            color: #1a73e8;
         }
-        
+
         .chat-guide ul {
-            list-style: none; /* 리스트 스타일 제거 */
+            list-style: none;
             margin: 0;
             padding: 0;
         }
-        
+
         .chat-guide li {
             display: flex;
             align-items: center;
             gap: 8px;
             font-size: 14px;
-            color: #555; /* 설명 텍스트 색상 */
+            color: #555;
+            margin-bottom: 8px;
         }
-        
+
         .chat-guide li::before {
-            content: "•"; /* 간단한 점 추가 */
+            content: "•";
             color: #1a73e8;
             font-size: 18px;
         }
@@ -566,7 +853,97 @@
             border-bottom: 1px solid #eee;
         }
         
-        
+        /* 가이드 아이콘 스타일 */
+        .guide-icon {
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .guide-icon:hover {
+            transform: scale(1.1);
+        }
+
+        /* 모달 스타일 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #f0f7ff 0%, #e8f0fe 100%);
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid rgba(26, 115, 232, 0.15);
+            border-radius: 12px;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            animation: slideDown 0.3s ease;
+        }
+
+        .close-modal {
+            color: #666;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .close-modal:hover {
+            color: #1a73e8;
+        }
+
+        .modal-content h5 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1a73e8;
+        }
+
+        .modal-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modal-content li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 12px;
+        }
+
+        .modal-content li::before {
+            content: "•";
+            color: #1a73e8;
+            font-size: 18px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
         .item.News a {
             display: block;
             padding: 12px 16px;
@@ -582,7 +959,8 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            min-width: 160px;
+            font-size: 11px;
+            color: #666;
         }
 
         
@@ -597,7 +975,19 @@
             align-items: center;
             gap: 12px;
         }
+        .news-publisher {
+            color: #555;
+            font-size: 11px;
+            position: relative;
+            padding-left: 8px;
+        }
         
+        .news-publisher:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #ccc;
+        }
         .Category {
             display: inline-block;
             padding: 2px 8px;
@@ -607,21 +997,27 @@
             font-size: 11px;
             font-weight: 500;
         }
-        
+
+        .news-date {
+            color: #888;
+        }
+
         .Day {
             color: #666;
             font-size: 12px;
             min-width: 80px;
         }
         
-        .Title {
-            color: #333;
+        .news-title {
             font-size: 13px;
-            font-weight: 400;
-            flex: 1;
+            color: #333;
+            font-weight: 500;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
             overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            margin-bottom: 4px;
         }
         
         .loading {
@@ -771,6 +1167,29 @@
             color: #666;
             background: #f8f9fa;
         }
+
+        .help-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-left: 12px;
+            padding: 4px 8px;
+            background: #e8f0fe;
+            color: #1a73e8;
+            border: none;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .help-button:hover {
+            background: #d2e3fc;
+        }
+
+        .help-button i {
+            font-size: 14px;
+        }
     </style>
 </head><body>
     <header class="header">
@@ -782,17 +1201,37 @@
             </div>
         </div>
         <div class="header-right">
-            <div class="user-info">
-                <span class="user-info-name">{{ user.last_name }}{{ user.first_name }}</span>
-                <span class="user-info-dot">•</span>
-                <span class="user-info-id">{{ user.username }}</span>
-                <span class="user-info-dot">•</span>
-                <span class="user-info-department">{{ user.profile.department }}</span>
+            <div class="user-profile-section" id="profileSection">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        {% if user.profile.profile_image and user.profile.profile_image.url != '/media/profile_images/default.png' %}
+                            <img src="{{ user.profile.profile_image.url }}" alt="프로필 이미지">
+                        {% else %}
+                            <i class="fas fa-user"></i>
+                        {% endif %}
+                    </div>
+                    <div class="user-basic-info" id="basicInfo">
+                        <div class="user-name-dept">
+                            <span class="user-name">{{ user.last_name }}{{ user.first_name }}</span>
+                            <span class="dot">•</span>
+                            <span class="user-department">{{ user.profile.department }}</span>
+                        </div>
+                        <div class="user-id" id="userId" style="display: none;">
+                            {{ user.username }}
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-actions">
+                    <a href="{% url 'my_page' %}" class="profile-btn">
+                        <i class="fas fa-user-cog"></i>
+                        <span>마이페이지</span>
+                    </a>
+                    <button class="logout-button" onclick="location.href='{% url 'logout' %}'">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>로그아웃</span>
+                    </button>
+                </div>
             </div>
-            <button class="logout-button" onclick="location.href='{% url 'logout' %}'">
-                <i class="fas fa-sign-out-alt"></i>
-                로그아웃
-            </button>
         </div>
     </header>
 
@@ -826,71 +1265,42 @@
                     FAQ 바로가기
                 </a>
             </div>
-        
-            <div class="user-profile-section" id="profileSection">
-                <!-- 기본 상태 -->
-                <div class="user-info">
-                    <div class="user-avatar">
-                        {% if user.profile.profile_image and user.profile.profile_image.url != '/media/profile_images/default.png' %}
-                            <img src="{{ user.profile.profile_image.url }}" alt="프로필 이미지">
-                        {% else %}
-                            <i class="fas fa-user"></i>
-                        {% endif %}
+            <div class="sidebar-section">
+                <h3>
+                    <i class="fas fa-newspaper"></i>
+                    공항공사 소식
+                </h3>
+                <div class="news-container">
+                    <div class="news-list" id="newsList">
+                        <!-- 뉴스 항목들이 여기에 동적으로 추가됨 -->
                     </div>
-                    <div class="user-basic-info" id="basicInfo">
-                        <!-- 이름과 부서 -->
-                        <div class="user-name-dept">
-                            <span class="user-name">{{ user.last_name }}{{ user.first_name }}</span>
-                            <span class="dot">•</span>
-                            <span class="user-department">{{ user.profile.department }}</span>
-                        </div>
-                        <!-- 사번 -->
-                        <div class="user-id" id="userId" style="display: none;">
-                            {{ user.username }}
-                        </div>
-                    </div>
-                </div>
-            
-            
-                <div class="profile-actions">
-                    <a href="{% url 'my_page' %}" class="profile-btn">
-                        <i class="fas fa-user-cog"></i>
-                        <span>마이페이지</span>
-                    </a>
                 </div>
             </div>
         </div>
 
         <div class="main-content">
-            <div class="notice-section">
-    <div class="NewsTab">
-        <button class="on" data-category="news">
-            <i class="fas fa-newspaper"></i>
-            한국공항공사 보도자료
-        </button>
-    </div>
-    <div class="NewsTabCont on" id="news-tab">
-        <div class="newsSlider"></div>
-            <div class="loading"></div>
-    </div>
-</div>
 
             <div class="chatbot-section">
                 <div class="chat-header">
                     <h4>
-                        <i class="fas fa-robot"></i>
                         인사규정 문의하기
+                        <button class="help-button" id="helpButton">
+                            <i class="fas fa-question-circle"></i>
+                            <span>이용 가이드</span>
+                        </button>
                     </h4>
                 </div>
                 
+                <!-- 가이드 내용이 여기에 위치 -->
                 <div class="chat-guide">
-                    <i class="fas fa-lightbulb"></i> <!-- 아이콘 추가 -->
+                    <i class="fas fa-info-circle"></i>
                     <div class="chat-guide-content">
-                        <h5>💡 챗봇 이용 안내</h5>
+                        <h5>인사규정 문의하기 이용 가이드</h5>
                         <ul>
-                            <li>인사규정과 관련된 질문을 자유롭게 입력해주세요.</li>
-                            <li>정확한 답변을 위해 구체적인 질문을 해주시면 좋습니다.</li>
-                            <li>예시) "연차 휴가는 어떻게 신청하나요?", "육아휴직 기간은 얼마인가요?"</li>
+                            <li>인사 관련 규정에 대해 자유롭게 질문해 주세요.</li>
+                            <li>구체적인 질문일수록 더 정확한 답변을 받으실 수 있습니다.</li>
+                            <li>예시: "연차 사용 방법에 대해 알려주세요", "육아휴직 신청 절차가 궁금합니다"</li>
+                            <li>대화 내용은 시스템 개선을 위해 저장될 수 있습니다.</li>
                         </ul>
                     </div>
                 </div>
@@ -1054,7 +1464,83 @@
                 }
             });
         });
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('guideModal');
+            const guideIcon = document.getElementById('guideIcon');
+            const closeBtn = document.querySelector('.close-modal');
+        
+            // 아이콘 클릭 시 모달 열기
+            guideIcon.addEventListener('click', function() {
+                modal.style.display = 'block';
+            });
+        
+            // X 튼 클릭 시 모달 닫기
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+        
+            // 모달 부 클릭 시 닫기
+            window.addEventListener('click', function(event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        
+            // ESC 키 누를 때 모달 닫기
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && modal.style.display === 'block') {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+
+        function updateSidebarNews() {
+            const newsList = document.getElementById('newsList');
+            if (!newsList) {
+                console.error('newsList element not found');
+                return;
+            }
+        
+            // 로딩 상태 표시
+            newsList.innerHTML = '<div class="loading">뉴스를 불러오는 중...</div>';
+        
+            fetch('/api/google-news/')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success && data.news) {
+                        newsList.innerHTML = data.news.map(item => `
+                            <div class="news-item">
+                                <a href="${item.link}" target="_blank">
+                                    <span class="news-title">${item.title}</span>
+                                    <div class="news-meta">
+                                        <span class="news-date">${item.pubDate}</span>
+                                    </div>
+                                </a>
+                            </div>
+                        `).join('');
+                    } else {
+                        throw new Error('Invalid news data format');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching news:', error);
+                    newsList.innerHTML = `<div class="error">뉴스를 불러오는데 실패했습니다.</div>`;
+                });
+        }
+        
+        // 페이지 로드 시 실행
+        document.addEventListener('DOMContentLoaded', function() {
+            updateSidebarNews();
+            // 5분마다 뉴스 업데이트
+            setInterval(updateSidebarNews, 300000);
+        });
     </script>
     <script src="{% static 'js/news.js' %}"></script>
+    <script src="{% static 'js/chat.js' %}"></script>
 </body>
 </html>

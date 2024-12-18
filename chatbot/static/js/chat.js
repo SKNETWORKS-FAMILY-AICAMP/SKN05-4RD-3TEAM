@@ -1,4 +1,65 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const helpButton = document.querySelector('.help-button');
+    const chatGuide = document.querySelector('.chat-guide');
+
+    // 요소 존재 확인
+    if (!helpButton || !chatGuide) {
+        console.error('필요한 요소를 찾을 수 없습니다:', {
+            helpButton: !!helpButton,
+            chatGuide: !!chatGuide
+        });
+        return;
+    }
+
+    // 초기에 가이드 숨기기
+    chatGuide.style.display = 'none';
+
+    // 버튼 클릭 시 가이드 토글
+    helpButton.addEventListener('click', function() {
+        if (chatGuide.style.display === 'none') {
+            chatGuide.style.display = 'flex';
+            chatGuide.style.opacity = '1';
+        } else {
+            chatGuide.style.opacity = '0';
+            setTimeout(() => {
+                chatGuide.style.display = 'none';
+            }, 300);
+        }
+    });
+});
+
+    // 초기에 가이드 숨기기
+    guideContent.style.display = 'none';
+
+    // 첫 방문 체크 및 가이드 표시
+    if (!localStorage.getItem('hasVisited')) {
+        setTimeout(() => {
+            guideContent.style.display = 'flex';
+            guideContent.style.opacity = '1';
+            localStorage.setItem('hasVisited', 'true');
+        }, 1000);
+    }
+
+    // 이용 가이드 버튼 클릭 이벤트
+    helpButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        if (guideContent.style.display === 'none') {
+            // 가이드 보이기
+            guideContent.style.display = 'flex';
+            setTimeout(() => {
+                guideContent.style.opacity = '1';
+            }, 10);
+        } else {
+            // 가이드 숨기기
+            guideContent.style.opacity = '0';
+            setTimeout(() => {
+                guideContent.style.display = 'none';
+            }, 300);
+        }
+    });
+
     // DOM 요소 가져오기
     const messageInput = document.getElementById('message-input');
     const sendButton = document.getElementById('send-button');
@@ -70,7 +131,7 @@ document.querySelector('.loading').style.display = 'none';
             sendMessage();
         }
     });
-});
+
 
 // CSRF 토큰 가져오기
 function getCSRFToken() {

@@ -95,3 +95,4 @@ if __name__ == "__main__":
         print(f"날짜: {notice['date']}")
         print(f"카테고리: {notice['category']}")
         print(f"링크: {notice['link']}") 
+        

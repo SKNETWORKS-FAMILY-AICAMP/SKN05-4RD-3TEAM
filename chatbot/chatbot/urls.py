@@ -35,7 +35,7 @@ urlpatterns = [
     path('faq/', views.faq_view, name='faq'),
     
     # API 엔드포인트
-    path('api/notices/', views.get_kac_notices, name='get_kac_notices'),  # URL 패턴 통일
+    path('api/news/', views.get_news, name='get_news'),
     path('api/google-news/', views.get_google_news, name='get_google_news'),# URL 패턴 통일
     path('api/weather/', views.get_weather, name='get_weather'),          # URL 패턴 통일
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \

@@ -21,7 +21,6 @@ from .models import Profile
 from django.views.decorators.csrf import csrf_exempt
 from .utils.kac_crawler import KACCrawler
 import logging
-from .utils.kac_notice_crawler import KACNoticeCrawler
 from django.views.decorators.http import require_http_methods
 import feedparser
 from datetime import datetime
@@ -32,7 +31,7 @@ import feedparser
 from datetime import datetime
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
-
+from .utils.kac_crawler import KACCrawler
 logger = logging.getLogger(__name__)
 
 # .env 파일 로드
@@ -343,26 +342,6 @@ def mypage_view(request):
     }
     return render(request, 'mypage.html', context)
 
-@require_http_methods(["GET"])
-def get_kac_notices(request):
-    try:
-        crawler = KACNoticeCrawler()
-        category = request.GET.get('category', 'notice').split(':')[0]  # notice:1 같은 형식 처리
-        count = int(request.GET.get('count', 5))
-        
-        notices = crawler.get_notices(category, count)
-        return JsonResponse({'success': True, 'notices': notices})
-        
-    except Exception as e:
-        return JsonResponse({
-            'success': False,
-            'error': str(e)
-        }, status=500)
-
-def get_all_notices(request):
-    crawler = KACCrawler()
-    all_notices = crawler.get_all_categories()
-    return JsonResponse(all_notices)
 
 @require_http_methods(["GET"])
 def get_google_news(request):
@@ -384,7 +363,7 @@ def get_google_news(request):
         feed = feedparser.parse(response.content)
         
         news_items = []
-        for entry in feed.entries[:5]:  # 최근 5개 뉴스
+        for entry in feed.entries[:4]:  # 최근 5개 뉴스
             try:
                 pub_date = datetime.strptime(entry.published, '%a, %d %b %Y %H:%M:%S %Z')
                 news_items.append({
@@ -406,3 +385,31 @@ def get_google_news(request):
             'error': str(e)
         }, status=500)
 
+from django.http import JsonResponse
+from django.views.decorators.http import require_http_methods
+from .utils.kac_crawler import KACCrawler
+
+@require_http_methods(["GET"])
+def get_news(request):
+    try:
+        crawler = KACCrawler()
+        count = int(request.GET.get('count', 4))
+        
+        # press 카테고리의 뉴스를 가져옴
+        news = crawler.get_notices('press', page=1, count=count)
+        
+        # 디버깅을 위한 로그
+        print("Crawler response:", news)
+        
+        if not news:  # 뉴스가 비어있는 경우
+            print("No news fetched from crawler")
+            return JsonResponse([], safe=False)
+            
+        return JsonResponse(news, safe=False)
+    except Exception as e:
+        print(f"뉴스 가져오기 실패: {str(e)}")
+        import traceback
+        print(traceback.format_exc())  # 상세한 에러 로그
+        return JsonResponse({
+            'error': str(e)
+        }, status=500)

@@ -23,6 +23,5 @@ urlpatterns = [
     path('delete-account/', views.delete_account, name='delete_account'),
     
     # API 엔드포인트
-    path('api/notices/', views.get_kac_notices, name='get_kac_notices'),
-    path('api/google-news/', views.get_google_news, name='get_google_news'),  # URL 수정
+    path('api/google-news/', views.get_google_news, name='get_google_news'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
