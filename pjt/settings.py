@@ -129,6 +129,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Media files
 MEDIA_URL = '/media/'
@@ -151,8 +152,6 @@ OPENAI_API_KEY = env('OPENAI_API_KEY')
 SECRET_KEY = env('SECRET_KEY')
 
 if not OPENAI_API_KEY:
-    raise ValueError("OPENAI_API_KEY 환경 변수가 설정되지 않았습니다.")
-if not SECRET_KEY:
     raise ValueError("OPENAI_API_KEY 환경 변수가 설정되지 않았습니다.")
 
 # 로그인 관련 설정
