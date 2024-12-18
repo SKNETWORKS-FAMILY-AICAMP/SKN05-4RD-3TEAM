@@ -31,11 +31,12 @@
 
 ### 📌 2. 기술 스택
 #### 2.1. 프론트엔드
-<div>
-<img src="http://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=Streamlit&logoColor=white"> 
-</div>
+
 
 #### 2.2 백엔드 
+<div>
+<img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=Python&logoColor=white"> 
+</div>
 
 ### 📌 3. 요구사항 정의서
 #### 3.1 사용자 관리
