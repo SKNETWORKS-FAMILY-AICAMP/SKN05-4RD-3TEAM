@@ -72,7 +72,7 @@
             transition: all 0.3s ease;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
-    
+        
         .user-profile-section:hover {
             background: #f8f9fa;
         }
@@ -107,8 +107,6 @@
             min-width: 0;
         }
     
-    
-    
         .profile-actions {
             display: none; /* 초기에는 숨김 */
             margin-top: 12px;
@@ -134,7 +132,7 @@
         .profile-btn:hover {
             background: #1557b0;
         }
-        /* 프로필 섹션 기본 스타일 */
+        
         .header-right .user-profile-section {
             position: relative;
             display: flex;
@@ -149,12 +147,10 @@
             height: 48px;
         }
 
-
         .header-right .user-profile-section.expanded {
             min-width: 220px;
         }
 
-        /* 프로필 액션 버튼 컨테이너 */
         .header-right .profile-actions {
             position: absolute;
             top: 100%;
@@ -174,7 +170,6 @@
             display: flex;
         }
 
-        /* 버튼 스타일 */
         .header-right .profile-btn,
         .header-right .logout-button {
             width: 100%;
@@ -255,385 +250,218 @@
             display: flex;
             height: calc(100vh - 70px);
             padding: 0;
-            .sidebar {
-                width: 250px;
-                background: white;
-                border-right: 1px solid #eee;
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-            }
-            .news-publisher {
-                color: #555;
-                font-size: 11px;
-                font-weight: 400;
-                margin-left: 8px; /* 날짜와 간격 추가 */
-            }
-            .sidebar-content {
-                padding: 20px;
-                border-bottom: 1px solid #eee;
-            }
-            
-            .sidebar-content h3 {
-                font-size: 14px;
-                color: #333;
-                font-weight: 600;
-                margin-bottom: 12px;
-                border-bottom: 2px solid #e1e6ff;
-                padding-bottom: 8px;
-            }
-            /* 사이드바 섹션 스타일 */
-            .sidebar-section {
-                padding: 20px;
-                border-bottom: 1px solid #eee;
-            }
+        }
 
-            /* 뉴스 섹션 스타일 */
-            .news-section {
-                flex: 1;
-                overflow: hidden;
-                display: flex;
-                flex-direction: column;
-            }
+        .sidebar {
+            width: 250px;
+            background: white;
+            border-right: 1px solid #eee;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
 
-            .news-section h3 {
-                font-size: 14px;
-                color: #333;
-                font-weight: 600;
-                margin-bottom: 16px;
-                display: flex;
-                align-items: center;
-                gap: 8px;
-            }
+        .news-publisher {
+            color: #555;
+            font-size: 11px;
+            font-weight: 400;
+            margin-left: 8px; 
+        }
 
-            .news-section h3 i {
-                color: #1a73e8;
-            }
-
-            .news-container {
-                flex: 1;
-                overflow-y: auto;
-            }
-
-            .news-list {
-                display: flex;
-                flex-direction: column;
-                gap: 12px;
-            }
-
-            /* 뉴스 아이템 스타일 */
-            .news-item {
-                padding: 12px;
-                background: #f8f9fa;
-                border-radius: 8px;
-                transition: all 0.2s ease;
-            }
-
-            .news-item:hover {
-                background: #f0f7ff;
-                transform: translateX(4px);
-            }
-
-            .news-item a {
-                text-decoration: none;
-                display: flex;
-                flex-direction: column;
-                gap: 6px;
-            }
-
-            .news-title {
-                font-size: 13px;
-                color: #333;
-                font-weight: 500;
-                line-height: 1.4;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-            }
-
-            .news-meta {
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                font-size: 11px;
-                color: #666;
-            }
-
-            .news-category {
-                color: #1a73e8;
-                background: #e8f0fe;
-                padding: 2px 6px;
-                border-radius: 4px;
-                font-weight: 500;
-            }
-
-            .news-date {
-                color: #888;
-            }
-
-            /* 스크롤바 스타일 */
-            .news-container::-webkit-scrollbar {
-                width: 4px;
-            }
-
-            .news-container::-webkit-scrollbar-track {
-                background: #f1f1f1;
-            }
-
-            .news-container::-webkit-scrollbar-thumb {
-                background: #ccc;
-                border-radius: 4px;
-            }
-
-            .news-container::-webkit-scrollbar-thumb:hover {
-                background: #999;
-            }
-            .category-list {
-                list-style: none;
-                margin-bottom: 20px;
-            }
-            
-            .category-list li {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                font-size: 14px;
-                color: #555;
-                padding: 8px 0;
-                cursor: pointer;
-                transition: all 0.2s ease;
-            }
-            
-            .category-list li:hover {
-                color: #1a73e8;
-            }
-            
-            .faq-link {
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                font-size: 14px;
-                color: #1a73e8;
-                text-decoration: none;
-                padding: 10px;
-                background: #f8f9ff;
-                border: 1px solid #e1e6ff;
-                border-radius: 8px;
-                transition: all 0.2s ease;
-            }
-            
-            .faq-link:hover {
-                background: #e8f0fe;
-                color: #1557b0;
-            }
+        .sidebar-content {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
         
-            .profile-container {
-                padding: 20px;
-                border-top: 1px solid #eee;
-                margin-top: auto;
-            }
+        .sidebar-content h3 {
+            font-size: 14px;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #e1e6ff;
+            padding-bottom: 8px;
+        }
+
+        .sidebar-section {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .news-section {
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-section h3 {
+            font-size: 14px;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .news-section h3 i {
+            color: #1a73e8;
+        }
+
+        .news-container {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .news-item {
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .news-item:hover {
+            background: #f0f7ff;
+            transform: translateX(4px);
+        }
+
+        .news-item a {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .news-title {
+            font-size: 13px;
+            color: #333;
+            font-weight: 500;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            color: #666;
+        }
+
+        .news-category {
+            color: #1a73e8;
+            background: #e8f0fe;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .news-date {
+            color: #888;
+        }
+
+        .news-container::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .news-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .news-container::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 4px;
+        }
+
+        .news-container::-webkit-scrollbar-thumb:hover {
+            background: #999;
+        }
+
+        .category-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
         
-            .user-profile-section {
-                background: white;
-                border-radius: 12px;
-                padding: 16px;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            }
+        .category-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: #555;
+            padding: 8px 0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
         
-            .user-basic-info {
-                display: flex;
-                flex-direction: column; /* 세로 정렬 */
-                gap: 4px; /* 항목 간격 */
-            }
-            
-            .user-name-dept {
-                display: flex;
-                align-items: center;
-                gap: 5px; /* 이름과 부서 사이 간격 */
-                font-size: 14px;
-                font-weight: 500;
-                color: #333;
-                white-space: nowrap; /* 한 줄에 표시 */
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            
-            .user-id {
-                font-size: 14px;
-                font-weight: 400;
-                color: #555;
-                display: none; /* 초기에는 숨김 */
-                margin-top: 4px; /* 이름 아래 간격 */
-            }
-            
-            .user-id-dot {
-                display: none; /* 사번 구분점도 초기에는 숨김 */
-                color: #333;
-            }
-            
-
-            .user-avatar {
-                width: 48px;
-                height: 48px;
-                border-radius: 50%;
-                overflow: hidden;
-                flex-shrink: 0;
-                background: #f8f9fa;
-                border: 2px solid #e8eaed;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
+        .category-list li:hover {
+            color: #1a73e8;
+        }
         
-            .user-avatar img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
+        .faq-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #1a73e8;
+            text-decoration: none;
+            padding: 10px;
+            background: #f8f9ff;
+            border: 1px solid #e1e6ff;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
         
-            .user-avatar i {
-                font-size: 24px;
-                color: #dadce0;
-            }
+        .faq-link:hover {
+            background: #e8f0fe;
+            color: #1557b0;
+        }
+    
+        .profile-container {
+            padding: 20px;
+            border-top: 1px solid #eee;
+            margin-top: auto;
+        }
+    
+        .user-basic-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
         
+        .user-name-dept {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
         
-            .profile-btn {
-                display: inline-flex;
-                align-items: center;
-                gap: 6px;
-                padding: 8px 16px;
-                background: #1a73e8;
-                color: white;
-                border: none;
-                border-radius: 6px;
-                font-size: 12px;
-                text-decoration: none;
-                transition: all 0.2s ease;
-                width: fit-content;
-            }
+        .user-id {
+            font-size: 14px;
+            font-weight: 400;
+            color: #555;
+            display: none;
+            margin-top: 4px;
+        }
         
-            .profile-btn:hover {
-                background: #1557b0;
-            }
-        
-            .text-truncate {
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            /* 헤더의 프로필 섹션 스타일 */
-            .header-right {
-                position: relative;
-            }
+        .user-id-dot {
+            display: none;
+            color: #333;
+        }
 
-            .header-right .user-profile-section {
-                background: white;
-                border-radius: 12px;
-                padding: 8px 12px;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-                transition: all 0.3s ease;
-                cursor: pointer;
-                min-width: 200px;
-            }
-
-            .header-right .user-info {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-            }
-
-            .header-right .user-avatar {
-                width: 36px;
-                height: 36px;
-                border-radius: 50%;
-                overflow: hidden;
-                flex-shrink: 0;
-                background: #f8f9fa;
-                border: 2px solid #e8eaed;
-            }
-
-            .header-right .user-basic-info {
-                flex: 1;
-                min-width: 0;
-            }
-
-            .header-right .user-name-dept {
-                font-size: 13px;
-                font-weight: 500;
-                color: #333;
-                display: flex;
-                align-items: center;
-                gap: 6px;
-            }
-
-            .header-right .profile-actions {
-                display: none;
-                position: absolute;
-                top: 100%;
-                right: 0;
-                background: white;
-                border-radius: 12px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                padding: 8px;
-                margin-top: 8px;
-                min-width: 200px;
-                z-index: 1000;
-            }
-
-            .header-right .user-profile-section.expanded .profile-actions {
-                display: flex;
-                gap: 8px;
-                flex-direction: column;
-            }
-
-            .header-right .profile-btn,
-            .header-right .logout-button {
-                width: 100%;
-                padding: 8px 12px;
-                border-radius: 6px;
-                font-size: 13px;
-                display: flex;
-                align-items: center;
-                gap: 6px;
-                justify-content: center;
-            }
-
-            .header-right .profile-btn {
-                background: #1a73e8;
-                color: white;
-                border: none;
-                text-decoration: none;
-            }
-
-            .header-right .profile-btn:hover {
-                background: #1557b0;
-            }
-
-            .header-right .logout-button {
-                background: white;
-                color: #666;
-                border: 1px solid #e1e6ff;
-            }
-
-            .header-right .logout-button:hover {
-                background: #f8f9ff;
-                color: #1a73e8;
-                border-color: #1a73e8;
-            }
-
-            /* 프로필 액션 메뉴 화살표 */
-            .header-right .profile-actions:before {
-                content: '';
-                position: absolute;
-                top: -6px;
-                right: 20px;
-                width: 12px;
-                height: 12px;
-                background: white;
-                transform: rotate(45deg);
-                box-shadow: -2px -2px 4px rgba(0,0,0,0.05);
-            }
         .main-content {
             flex: 1;
             display: flex;
@@ -643,7 +471,8 @@
             height: calc(100vh - 80px);
             max-width: 1600px;
             margin: 0 auto;
-        }       
+        }
+
         .chatbot-section {
             background: #fff;
             border-radius: 16px;
@@ -675,36 +504,25 @@
             border-radius: 8px;
             padding: 16px;
             margin: 12px 0;
-            align-items: flex-start;
-            gap: 12px;
             transition: opacity 0.3s ease;
             opacity: 0;
         }
 
-        .chat-guide i {
-            color: #1a73e8;
-            font-size: 20px;
-            margin-top: 4px;
-        }
-
-        .chat-guide-content {
-            flex: 1;
-        }
-
-        .chat-guide h5 {
+        /* 헤더 영역 추가 */
+        .chat-guide > .chat-guide-content > h5 {
             font-size: 16px;
             font-weight: 600;
             margin-bottom: 12px;
             color: #1a73e8;
         }
 
-        .chat-guide ul {
+        .chat-guide-content ul {
             list-style: none;
             margin: 0;
             padding: 0;
         }
 
-        .chat-guide li {
+        .chat-guide-content li {
             display: flex;
             align-items: center;
             gap: 8px;
@@ -713,13 +531,15 @@
             margin-bottom: 8px;
         }
 
-        .chat-guide li::before {
+        .chat-guide-content li::before {
             content: "•";
             color: #1a73e8;
             font-size: 18px;
         }
 
         .chat-messages {
+            width: 100%; /* 전체 너비 사용 */
+            box-sizing: border-box;
             flex: 1;
             overflow-y: auto;
             padding: 20px;
@@ -779,13 +599,15 @@
             background: white;
             transition: all 0.3s ease;
         }
+
         .loading {
-            display: none; /* 초기에는 숨김 */
+            display: none; 
             margin: 0;
             padding: 0;
             height: 0;
             line-height: 0;
         }
+
         #chat-input:focus {
             outline: none;
             border-color: #1a73e8;
@@ -823,11 +645,12 @@
             margin-bottom: 12px;
             border-bottom: 1px solid #eee;
         }
-        /* 부모 컨테이너의 여백도 제거 */
+
         .NewsTabCont {
-            margin: 0; /* 부모 요소의 여백 제거 */
-            padding: 0; /* 부모 요소의 패딩 제거 */
+            margin: 0; 
+            padding: 0; 
         }
+
         .NewsTab button {
             display: flex;
             align-items: center;
@@ -840,11 +663,13 @@
             border: none;
             cursor: pointer;
         }
+
         .newsSlider {
             display: flex;
             flex-direction: column;
             gap: 0;
         }
+
         .NewsTab button i {
             font-size: 14px;
         }
@@ -853,7 +678,6 @@
             border-bottom: 1px solid #eee;
         }
         
-        /* 가이드 아이콘 스타일 */
         .guide-icon {
             cursor: pointer;
             transition: transform 0.2s ease;
@@ -863,8 +687,8 @@
             transform: scale(1.1);
         }
 
-        /* 모달 스타일 */
-        .modal {
+        /* 모달 스타일 - 필요 없으면 제거 가능 */
+        #guideModal {
             display: none;
             position: fixed;
             z-index: 1000;
@@ -876,7 +700,7 @@
             animation: fadeIn 0.3s ease;
         }
 
-        .modal-content {
+        .guide-content {
             background: linear-gradient(145deg, #f0f7ff 0%, #e8f0fe 100%);
             margin: 15% auto;
             padding: 20px;
@@ -889,32 +713,38 @@
             animation: slideDown 0.3s ease;
         }
 
-        .close-modal {
-            color: #666;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.2s ease;
+        .guide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
         }
 
-        .close-modal:hover {
-            color: #1a73e8;
-        }
-
-        .modal-content h5 {
+        .guide-header h5 {
             font-size: 16px;
             font-weight: 600;
-            margin-bottom: 16px;
+            margin: 0;
             color: #1a73e8;
         }
 
-        .modal-content ul {
+        #closeGuide {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        #closeGuide:hover {
+            color: #1a73e8;
+        }
+
+        .guide-body ul {
             list-style: none;
             padding: 0;
         }
 
-        .modal-content li {
+        .guide-body li {
             display: flex;
             align-items: center;
             gap: 8px;
@@ -923,15 +753,10 @@
             margin-bottom: 12px;
         }
 
-        .modal-content li::before {
+        .guide-body li::before {
             content: "•";
             color: #1a73e8;
             font-size: 18px;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         @keyframes slideDown {
@@ -944,6 +769,7 @@
                 opacity: 1;
             }
         }
+
         .item.News a {
             display: block;
             padding: 12px 16px;
@@ -955,15 +781,7 @@
         .item.News a:hover {
             background: #f8f9fa;
         }
-        .news-meta {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 11px;
-            color: #666;
-        }
 
-        
         .Publisher {
             color: #444;
             font-size: 12px;
@@ -975,6 +793,7 @@
             align-items: center;
             gap: 12px;
         }
+
         .news-publisher {
             color: #555;
             font-size: 11px;
@@ -988,6 +807,7 @@
             left: 0;
             color: #ccc;
         }
+
         .Category {
             display: inline-block;
             padding: 2px 8px;
@@ -996,10 +816,6 @@
             border-radius: 4px;
             font-size: 11px;
             font-weight: 500;
-        }
-
-        .news-date {
-            color: #888;
         }
 
         .Day {
@@ -1067,17 +883,6 @@
             border-color: #e8f0fe;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(26, 115, 232, 0.08);
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         @keyframes typingBounce {
@@ -1190,8 +995,158 @@
         .help-button i {
             font-size: 14px;
         }
+
+        /* 닫기 버튼 스타일 */
+        .close-chat-guide {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .close-chat-guide:hover {
+            color: #1a73e8;
+        }
+
+        /* 가이드 기본 스타일 */
+        .chat-guide {
+            display: none;
+            width: 100%; /* 전체 너비 사용 */
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 12px auto; /* 중앙 정렬을 위해 auto 마진 사용 */
+            transition: opacity 0.3s ease;
+            opacity: 0;
+            box-sizing: border-box;
+        }
+
+        .guide-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .guide-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            width: 400px;
+            max-width: 90%;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+        }
+
+        .guide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .guide-header h5 {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .close-button {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .guide-body {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .guide-body ul {
+            margin: 0;
+            padding-left: 20px;
+            list-style-type: disc;
+        }
+
+        .guide-body ul ul {
+            margin-top: 5px;
+        }
+
+        .guide-body li {
+            margin-bottom: 8px;
+        }
+
+        .guide-body li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* chat-guide-content 스타일 추가 */
+        .chat-guide-content {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .chat-guide-content ul {
+            margin: 0;
+            padding-left: 20px;
+            list-style-type: disc;
+        }
+
+        .chat-guide-content li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .chat-guide-content li:last-child {
+            margin-bottom: 0;
+        }
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .chat-guide,
+            .guide-content {
+                width: 95%;
+                margin: 12px auto;
+            }
+        }
+        /* X버튼과 타이틀을 같은 줄에 배치하기 위해 header 부분 추가 */
+        .chat-guide > i {
+            display: none; /* 기존 아이콘 제거하거나 필요시 별도 사용 */
+        }
+
+        .chat-guide-content h5 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 0 12px 0;
+        }
+
+        .chat-guide-content h5 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a73e8;
+        }
+
+        /* h5 와 close-chat-guide 같은 레벨에 놓으려면 별도 구조 필요
+           여기서는 h5 아래의 내용에 버튼을 같이 놓으려면 h5 대신 header div를 둘 수 있음.
+           아래처럼 h5를 삭제하고 header div로 바꿔도 됨.
+        */
     </style>
-</head><body>
+</head>
+<body>
     <header class="header">
         <div class="header-left">
             <img src="{% static 'KAC.png' %}" alt="한국공항공사 로고" class="logo">
@@ -1237,7 +1192,6 @@
 
     <div class="container">
         <div class="sidebar">
-            <!-- 상단 카테고리 및 FAQ -->
             <div class="sidebar-content">
                 <h3>주요 카테고리</h3>
                 <ul class="category-list">
@@ -1272,30 +1226,31 @@
                 </h3>
                 <div class="news-container">
                     <div class="news-list" id="newsList">
-                        <!-- 뉴스 항목들이 여기에 동적으로 추가됨 -->
+                        <!-- 동적으로 뉴스 목록 추가 -->
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="main-content">
-
             <div class="chatbot-section">
                 <div class="chat-header">
                     <h4>
                         인사규정 문의하기
-                        <button class="help-button" id="helpButton">
+                        <button class="help-button" id="helpButton" type="button">
                             <i class="fas fa-question-circle"></i>
-                            <span>이용 가이드</span>
+                            이용 가이드
                         </button>
                     </h4>
                 </div>
-                
-                <!-- 가이드 내용이 여기에 위치 -->
+
+                <!-- chat-guide 수정: h5와 close 버튼을 한 라인에 -->
                 <div class="chat-guide">
-                    <i class="fas fa-info-circle"></i>
                     <div class="chat-guide-content">
-                        <h5>인사규정 문의하기 이용 가이드</h5>
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                            <h5 style="margin:0;font-size:16px;font-weight:600;color:#1a73e8;">인사규정 문의하기 이용 가이드</h5>
+                            <button class="close-chat-guide" id="closeChatGuide">&times;</button>
+                        </div>
                         <ul>
                             <li>인사 관련 규정에 대해 자유롭게 질문해 주세요.</li>
                             <li>구체적인 질문일수록 더 정확한 답변을 받으실 수 있습니다.</li>
@@ -1324,174 +1279,162 @@
     </div>
 
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const chatInput = document.getElementById('chat-input');
+        const sendButton = document.getElementById('send-button');
+        const chatMessages = document.getElementById('chat-messages');
+        const helpButton = document.getElementById('helpButton');
+        const guideModal = document.getElementById('guideModal');
+        const closeGuide = document.getElementById('closeGuide');
 
-        // 챗봇 기능 초기화
-        function initializeChatbot() {
-            const chatInput = document.getElementById('chat-input');
-            const sendButton = document.getElementById('send-button');
-            const chatMessages = document.getElementById('chat-messages');
+        // chat-guide 관련 요소
+        const chatGuide = document.querySelector('.chat-guide');
+        const closeChatGuide = document.getElementById('closeChatGuide');
+        let isGuideVisible = false;
 
-            function sendMessage() {
-                const message = chatInput.value.trim();
-                if (!message) return;
-            
-                addMessage('user', message);
-                chatInput.value = '';
-            
-                // API 호출 경로 수정
-                fetch('/api/chat/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': getCSRFToken()
-                    },
-                    body: JSON.stringify({ message: message })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.response) {
-                        const formattedResponse = data.response.replace(/\n/g, '<br>');
-                        addMessage('bot', formattedResponse);
-                    } else {
-                        addMessage('bot', '죄송합니다. 응답을 받지 못했습니다.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    addMessage('bot', '죄송합니다. 오류가 발생했습니다.');
-                });
-            }
-            
-
-            // 메시지 추가 함수
-            function addMessage(type, content) {
-                const messageDiv = document.createElement('div');
-                messageDiv.className = `message ${type}-message`;
-                
-                if (type === 'bot') {
-                    const botWrapper = document.createElement('div');
-                    botWrapper.className = 'bot-message-wrapper';
-                    
-                    const avatar = document.createElement('div');
-                    avatar.className = 'bot-avatar';
-                    avatar.innerHTML = '<i class="fas fa-robot"></i>';
-                    
-                    const contentDiv = document.createElement('div');
-                    contentDiv.className = 'message-content';
-                    contentDiv.innerHTML = content;
-                    
-                    botWrapper.appendChild(avatar);
-                    botWrapper.appendChild(contentDiv);
-                    messageDiv.appendChild(botWrapper);
-                } else {
-                    messageDiv.innerHTML = content;
-                }
-                
-                chatMessages.appendChild(messageDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-
-            // 이벤트 리스너 등록
-            sendButton.addEventListener('click', sendMessage);
-            chatInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    sendMessage();
-                }
-            });
+        // 필수 요소 확인 (모달 사용여부에 따라 guideModal, closeGuide 필요없다면 조건에서 제외 가능)
+        if (!helpButton || !chatInput || !sendButton || !chatMessages || !chatGuide || !closeChatGuide) {
+            console.error('필요한 요소를 찾을 수 없습니다.');
+            return;
         }
 
-        // CSRF 토큰 가져오기
-        function getCSRFToken() {
-            const cookies = document.cookie.split(';');
-            for (let cookie of cookies) {
-                const [name, value] = cookie.trim().split('=');
-                if (name === 'csrftoken') return value;
-            }
-            return '';
-        }
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
-            return `${year}.${month}.${day}`;
-        }
+        // 모달 관련 로직 필요 없으면 제거 가능
+        if (guideModal && closeGuide) {
+            helpButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                guideModal.style.display = 'block';
+            });
 
+            closeGuide.addEventListener('click', function(e) {
+                e.preventDefault();
+                guideModal.style.display = 'none';
+            });
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // 챗봇 기능 초기화
-            initializeChatbot();
-            
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const profileSection = document.getElementById('profileSection');
-            let isExpanded = false;
-    
-            profileSection.addEventListener('click', function(e) {
-                // 마이페이지 링크 클릭 시 이벤트 전파 중단
-                if (e.target.closest('.profile-btn')) {
-                    return;
-                }
-    
-                isExpanded = !isExpanded;
-                this.classList.toggle('expanded', isExpanded);
-            });
-    
-            // 외부 클릭 시 프로필 섹션 축소
-            document.addEventListener('click', function(e) {
-                if (!profileSection.contains(e.target) && isExpanded) {
-                    isExpanded = false;
-                    profileSection.classList.remove('expanded');
-                }
-            });
-        });
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const profileSection = document.getElementById('profileSection');
-            const userId = document.getElementById('userId');
-            let isExpanded = false;
-        
-            profileSection.addEventListener('click', function () {
-                isExpanded = !isExpanded;
-        
-                // 확장 상태 시 사번 표시
-                if (isExpanded) {
-                    userId.style.display = 'block';
-                } else {
-                    userId.style.display = 'none';
-                }
-            });
-        });
-        document.addEventListener('DOMContentLoaded', function() {
-            const modal = document.getElementById('guideModal');
-            const guideIcon = document.getElementById('guideIcon');
-            const closeBtn = document.querySelector('.close-modal');
-        
-            // 아이콘 클릭 시 모달 열기
-            guideIcon.addEventListener('click', function() {
-                modal.style.display = 'block';
-            });
-        
-            // X 튼 클릭 시 모달 닫기
-            closeBtn.addEventListener('click', function() {
-                modal.style.display = 'none';
-            });
-        
-            // 모달 부 클릭 시 닫기
             window.addEventListener('click', function(event) {
-                if (event.target == modal) {
-                    modal.style.display = 'none';
+                if (event.target === guideModal) {
+                    guideModal.style.display = 'none';
                 }
             });
-        
-            // ESC 키 누를 때 모달 닫기
+
             document.addEventListener('keydown', function(event) {
-                if (event.key === 'Escape' && modal.style.display === 'block') {
-                    modal.style.display = 'none';
+                if (event.key === 'Escape' && guideModal.style.display === 'block') {
+                    guideModal.style.display = 'none';
                 }
             });
+        }
+
+        // chat-guide 토글
+        helpButton.addEventListener('click', function() {
+            isGuideVisible = !isGuideVisible;
+            if (isGuideVisible) {
+                chatGuide.style.display = 'block';
+                setTimeout(() => {
+                    chatGuide.style.opacity = '1';
+                }, 10);
+            } else {
+                chatGuide.style.opacity = '0';
+                setTimeout(() => {
+                    chatGuide.style.display = 'none';
+                }, 300);
+            }
+        });
+
+        closeChatGuide.addEventListener('click', function() {
+            isGuideVisible = false;
+            chatGuide.style.opacity = '0';
+            setTimeout(() => {
+                chatGuide.style.display = 'none';
+            }, 300);
+        });
+
+        function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+        
+            addMessage('user', message);
+            chatInput.value = '';
+        
+            fetch('/api/chat/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCSRFToken()
+                },
+                body: JSON.stringify({ message: message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.response) {
+                    const formattedResponse = data.response.replace(/\n/g, '<br>');
+                    addMessage('bot', formattedResponse);
+                } else {
+                    addMessage('bot', '죄송합니다. 응답을 받지 못했습니다.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                addMessage('bot', '죄송합니다. 오류가 발생했습니다.');
+            });
+        }
+
+        function addMessage(type, content) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}-message`;
+            
+            if (type === 'bot') {
+                const botWrapper = document.createElement('div');
+                botWrapper.className = 'bot-message-wrapper';
+                
+                const avatar = document.createElement('div');
+                avatar.className = 'bot-avatar';
+                avatar.innerHTML = '<i class="fas fa-robot"></i>';
+                
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'message-content';
+                contentDiv.innerHTML = content;
+                
+                botWrapper.appendChild(avatar);
+                botWrapper.appendChild(contentDiv);
+                messageDiv.appendChild(botWrapper);
+            } else {
+                messageDiv.innerHTML = content;
+            }
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        sendButton.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        const profileSection = document.getElementById('profileSection');
+        const userId = document.getElementById('userId');
+        let isExpanded = false;
+
+        profileSection.addEventListener('click', function(e) {
+            if (e.target.closest('.profile-btn')) {
+                return;
+            }
+
+            isExpanded = !isExpanded;
+            this.classList.toggle('expanded', isExpanded);
+
+            if (userId) {
+                userId.style.display = isExpanded ? 'block' : 'none';
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!profileSection.contains(e.target) && isExpanded) {
+                isExpanded = false;
+                profileSection.classList.remove('expanded');
+                if (userId) userId.style.display = 'none';
+            }
         });
 
         function updateSidebarNews() {
@@ -1501,7 +1444,6 @@
                 return;
             }
         
-            // 로딩 상태 표시
             newsList.innerHTML = '<div class="loading">뉴스를 불러오는 중...</div>';
         
             fetch('/api/google-news/')
@@ -1533,13 +1475,23 @@
                 });
         }
         
-        // 페이지 로드 시 실행
-        document.addEventListener('DOMContentLoaded', function() {
-            updateSidebarNews();
-            // 5분마다 뉴스 업데이트
-            setInterval(updateSidebarNews, 300000);
-        });
+        updateSidebarNews();
+        setInterval(updateSidebarNews, 300000);
+    });
+
+    function getCSRFToken() {
+        const cookies = document.cookie.split(';');
+        for (let cookie of cookies) {
+            const [name, value] = cookie.trim().split('=');
+            if (name === 'csrftoken') {
+                return value;
+            }
+        }
+        return '';
+    }
     </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    {% load static %}
     <script src="{% static 'js/news.js' %}"></script>
     <script src="{% static 'js/chat.js' %}"></script>
 </body>
