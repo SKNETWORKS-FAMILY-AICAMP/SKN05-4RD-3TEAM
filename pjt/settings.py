@@ -24,7 +24,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-pb&n4pbmhj!+s%f6i-n868#bxu5nny@8nzvl66s1dg95+9#rw@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -145,14 +144,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 env = environ.Env(DEBUG=(bool, True))
 
 # 읽어올 환경 변수 파일을 지정
-environ.Env.read_env(
-  env_file = os.path.join(BASE_DIR, '.env')
-)
+environ.Env.read_env(os.path.join(BASE_DIR, 'keys.env'))
 
 # 설정한 변수를 읽어옴
 OPENAI_API_KEY = env('OPENAI_API_KEY')
+SECRET_KEY = env('SECRET_KEY')
 
 if not OPENAI_API_KEY:
+    raise ValueError("OPENAI_API_KEY 환경 변수가 설정되지 않았습니다.")
+if not SECRET_KEY:
     raise ValueError("OPENAI_API_KEY 환경 변수가 설정되지 않았습니다.")
 
 # 로그인 관련 설정
