@@ -1,0 +1,105 @@
+:root {
+    /* 브랜드 컬러 */
+    --kac-blue: #1428A0;
+    --kac-red: #E60012;
+    
+    /* 배경색 */
+    --bg-white: #FFFFFF;
+    --bg-light: #F5F5F5;
+    
+    /* 텍스트 색상 */
+    --text-dark: #333333;
+    --text-medium: #666666;
+    --text-light: #999999;
+    
+    /* 보더 색상 */
+    --border-light: #EEEEEE;
+    --border-medium: #DDDDDD;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #f5f6f8;
+    min-height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: var(--bg-white);
+    border-bottom: 1px solid var(--border-light);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    width: 60px;
+    height: auto;
+}
+
+.company-title {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.company-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--kac-blue);
+}
+
+.company-subtitle {
+    font-size: 13px;
+    color: #666;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.main-content {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logout-button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border: 1px solid #e1e6ff;
+    border-radius: 6px;
+    background: white;
+    color: #666;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.logout-button:hover {
+    background: var(--kac-blue);
+    color: var(--bg-white);
+    border-color: var(--kac-blue);
+}

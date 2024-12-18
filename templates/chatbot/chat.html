@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>한국공항공사 인사규정 챗봇</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="{% static 'css/chat.css' %}" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <img src="/media/KAC.png" alt="한국공항공사 로고" class="logo">
+            <div class="company-title">
+                <span class="company-name">한국공항공사</span>
+                <span class="company-subtitle">인사규정 챗봇 서비스</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="user-profile-section" id="profileSection">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        {% if user.profile.profile_image and user.profile.profile_image.url != '/media/profile_images/default.png' %}
+                            <img src="{{ user.profile.profile_image.url }}" alt="프로필 이미지">
+                        {% else %}
+                            <i class="fas fa-user"></i>
+                        {% endif %}
+                    </div>
+                    <div class="user-basic-info" id="basicInfo">
+                        <div class="user-name-dept">
+                            <span class="user-name">{{ user.last_name }}{{ user.first_name }}</span>
+                            <span class="dot">•</span>
+                            <span class="user-department">{{ user.profile.department }}</span>
+                        </div>
+                        <div class="user-id" id="userId" style="display: none;">
+                            {{ user.username }}
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-actions">
+                    <a href="{% url 'account:my_page' %}" class="profile-btn">
+                        <i class="fas fa-user-cog"></i>
+                        <span>마이페이지</span>
+                    </a>
+                    <button class="logout-button" onclick="location.href='{% url 'account:logout' %}'">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>로그아웃</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-content">
+                <h3>인사 관련 규정집</h3>
+                <ul class="category-list">
+                    <li>
+                        <i class="fas fa-user"></i>
+                        <a href="/media/files/공무직근로자_관리예규.hwp" download="공무직근로자_관리예규.hwp">공무직근로자 관리예규</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-user"></i>
+                        <a href="/media/files/기간제근로자_관리예규.hwp" download="기간제근로자_관리예규.hwp">기간제근로자 관리예규</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-shield-alt"></i>
+                        <a href="/media/files/안전사고에_관한_임원_문책규정.hwp" download="안전사고에_관한_임원_문책규정.hwp">안전사고에 관한 임원 문책규정</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-clock"></i>
+                        <a href="/media/files/유연근무제운영예규.hwp" download="유연근무제운영예규.hwp">유연근무제 운영예규</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-user-cog"></i>
+                        <a href="/media/files/인사규정.hwp" download="인사규정.hwp">인사규정</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-user-cog"></i>
+                        <a href="/media/files/인사규정시행세칙.hwp" download="인사규정시행세칙.hwp">인사규정 시행세칙</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-briefcase"></i>
+                        <a href="/media/files/임원_복무_예규.hwp" download="임원_복무_예규.hwp">임원 복무 예규</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-book"></i>
+                        <a href="/media/files/취업규칙.hwp" download="취업규칙.hwp">취업규칙</a>
+                    </li>
+                </ul>
+        
+                <h3>주소</h3>
+                <a href="#" id="copy-address" class="faq-link">
+                    <i class="fas fa-question-circle"></i>
+                    서울특별시 강서구 하늘길 78 KAC한국공항공사
+                </a>
+                <p id="copy-notice" style="display: none; color: green;">주소가 복사되었습니다!</p>
+            </div>
+            <div class="sidebar-section">
+                <h3>
+                    <i class="fas fa-newspaper"></i>
+                    공항공사 소식
+                </h3>
+                <div class="news-container">
+                    <div class="news-list" id="newsList">
+                        <!-- 동적으로 뉴스 목록 추가 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+
+        <div class="main-content">
+            <div class="chatbot-section">
+                <div class="chat-header">
+                    <h4>
+                        인사규정 문의하기
+                        <button class="help-button" id="helpButton" type="button">
+                            <i class="fas fa-question-circle"></i>
+                            이용 가이드
+                        </button>
+                    </h4>
+                </div>
+
+                <!-- chat-guide 수정: h5와 close 버튼을 한 라인에 -->
+                <div class="chat-guide">
+                    <div class="chat-guide-content">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                            <h5 style="margin:0;font-size:16px;font-weight:600;color:#1a73e8;">인사규정 문의하기 이용 가이드</h5>
+                            <button class="close-chat-guide" id="closeChatGuide">&times;</button>
+                        </div>
+                        <ul>
+                            <li>인사 관련 규정에 대해 자유롭게 질문해 주세요.</li>
+                            <li>구체적인 질문일수록 더 정확한 답변을 받으실 수 있습니다.</li>
+                            <li>예시: "연차 사용 방법에 대해 알려주세요", "육아휴직 신청 절차가 궁금합니다"</li>
+                            <li>대화 내용은 시스템 개선을 위해 저장될 수 있습니다.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="chat-messages" id="chat-messages"></div>
+
+                <div class="chat-input-area">
+                    <div class="input-wrapper">
+                        <textarea 
+                            id="chat-input" 
+                            placeholder="질문을 입력해주세요..."
+                            rows="1"
+                        ></textarea>
+                        <button id="send-button">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="{% static 'js/chat.js' %}"></script>
+</body>
+</html>

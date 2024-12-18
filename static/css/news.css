@@ -1,0 +1,99 @@
+.news-section {
+    margin: 20px 0;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.news-section h3 {
+    color: #333;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 16px;
+}
+
+.news-item {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease;
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
+
+.news-item:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.news-item a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.news-item h4 {
+    color: #1a73e8;
+    margin: 0 0 5px 0;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.news-date {
+    color: #666;
+    font-size: 12px;
+}
+
+#recent-news {
+    max-height: 300px;
+    overflow-y: auto;
+    transition: opacity 0.3s ease;
+}
+
+.loading, .error {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+.NewsTab {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.NewsTab button {
+    padding: 10px 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0.6;
+}
+
+.NewsTab button.on {
+    opacity: 1;
+    font-weight: bold;
+    color: #1a73e8;
+}
+
+/* 스크롤바 스타일링 */
+#recent-news::-webkit-scrollbar {
+    width: 6px;
+}
+
+#recent-news::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+#recent-news::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+#recent-news::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

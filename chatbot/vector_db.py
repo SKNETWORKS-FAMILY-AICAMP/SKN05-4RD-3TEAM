@@ -1,23 +1,18 @@
 import os
 import shutil
-from dotenv import load_dotenv
 from langchain_community.vectorstores import Chroma
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
-from langchain.prompts import ChatPromptTemplate
+from django.conf import settings
 
-load_dotenv()
 
 # OpenAI API 키 로드
-openai_api_key = os.getenv('OPENAI_API_KEY')
-
-if not openai_api_key:
-    raise ValueError("OPENAI_API_KEY 환경 변수가 설정되지 않았습니다.")
+openai_api_key = settings.OPENAI_API_KEY
 
 # 절확한 경로 설정
-PROJECT_ROOT = "/Users/parkchangyu/PROJECT/3rd_PROJECT"
-TXT_FILE_PATH = os.path.join(PROJECT_ROOT, "recco", "chatbot", "data", "preprocessed_texts.txt")
-VECTOR_DB_PATH = os.path.join(PROJECT_ROOT, "recco", "chatbot", "data", "vector_db")
+PROJECT_ROOT = settings.BASE_DIR
+TXT_FILE_PATH = os.path.join(PROJECT_ROOT, "chatbot", "data", "preprocessed_texts.txt")
+VECTOR_DB_PATH = os.path.join(PROJECT_ROOT, "chatbot", "data", "vector_db")
 
 print(f"현재 작업 디렉토리: {os.getcwd()}")
 print(f"텍스트 파일 경로: {TXT_FILE_PATH}")
