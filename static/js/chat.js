@@ -140,18 +140,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // 주소 복사 기능
-    if (copyButton) {
+    // navigator.clipboard API는 보안 컨텍스트(HTTPS)에서만 작동합니다
+    // 대체 방법으로 다음과 같은 코드를 사용할 수 있습니다
+    if (copyButton && copyNotice) {
         copyButton.addEventListener('click', function(e) {
             e.preventDefault();
             const address = copyButton.innerText.trim();
-            navigator.clipboard.writeText(address).then(() => {
+            
+            // 대체 복사 방법
+            const textarea = document.createElement('textarea');
+            textarea.value = address;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
                 copyNotice.style.display = 'block';
                 setTimeout(() => {
                     copyNotice.style.display = 'none';
                 }, 2000);
-            }).catch(err => {
+            } catch (err) {
                 console.error('주소 복사 실패:', err);
-            });
+            }
+            document.body.removeChild(textarea);
         });
     }
 
