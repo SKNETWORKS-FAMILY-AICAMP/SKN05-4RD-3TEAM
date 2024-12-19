@@ -124,7 +124,7 @@ def update_profile_image(request):
             allowed_types = ['image/jpeg', 'image/png', 'image/gif']
             if image_file.content_type not in allowed_types:
                 messages.error(request, '지원하지 않는 이미지 형식입니다. (JPEG, PNG, GIF만 가능)')
-                return redirect('account/my_page')
+                return redirect('account:my_page')
             
             # 기존 프로필 이미지 삭제 (기본 이미지가 아닌 경우)
             profile = request.user.profile
@@ -169,7 +169,7 @@ def delete_account(request):
                 # 로그아웃
                 logout(request)
                 messages.success(request, '회원 탈퇴가 완료되었습니다.')
-                return redirect('account/login')
+                return redirect('account:login')
                 
         except Exception as e:
             messages.error(request, f'회원 탈퇴 중 오류가 발생했습니다: {str(e)}')
