@@ -2,7 +2,7 @@
 
 ### 🤖 4차 프로젝트: LLM 연동 내외부 문서 기반 질의응답 시스템  
 **프로젝트명:** 법률 확인 챗봇 시스템  
-**개발기간:** 2024.11.26 - 2024.11.27  
+**개발기간:** 2024.12.18 - 2024.12.19  
 
 ## 💻 팀 소개
 
@@ -30,12 +30,16 @@
 
 
 ### 📌 2. 기술 스택
-#### 2.1. 프론트엔드
-
-
-#### 2.2 백엔드 
 <div>
-<img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=Python&logoColor=white"> 
+<img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=Python&logoColor=white">
+<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+<img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+<img src="https://img.shields.io/badge/django-092E20?style=for-the-badge&logo=django&logoColor=white">
+<img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white">
+<img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=aws&logoColor=white">
+
+  nglnx, 우분투, openai 
 </div>
 
 ### 📌 3. 요구사항 정의서
@@ -155,7 +159,7 @@
 
 ### 📌 5. 시스템 구성도
 
-
+  ![image](img/system.jpg)
 
 ### 📌 6. 테스트 계획 및 결과
 
