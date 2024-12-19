@@ -88,8 +88,8 @@ input:focus {
 .register-button {
     width: 100%;
     padding: 12px;
-    background-color: var(--kac-blue);
-    color: var(--bg-white);
+    background-color: #f5f5f5;  /* var(--kac-blue) 대신 직접 파란색 지정 */
+    color: #000000;  
     border: none;
     border-radius: 5px;
     font-size: 16px;
@@ -98,7 +98,7 @@ input:focus {
 }
 
 .register-button:hover {
-    background-color: #0f1f7d;
+    background-color: #1565c0;  
 }
 
 .error-message {
