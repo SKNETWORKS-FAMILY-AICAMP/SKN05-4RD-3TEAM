@@ -17,7 +17,7 @@ class KACCrawler:
         }
         self.session = requests.Session()
 
-    def get_notices(self, category='notice', page=1, count=5):
+    def get_notices(self, category='notice', page=1, count=3):
         try:
             # 카테고리별 설정
             category_params = {

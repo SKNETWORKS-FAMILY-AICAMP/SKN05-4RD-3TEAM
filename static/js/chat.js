@@ -4,11 +4,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const chatMessages = document.getElementById('chat-messages');
     const helpButton = document.getElementById('helpButton');
     const closeGuide = document.getElementById('closeGuide');
-
+    
     // chat-guide 관련 요소
     const chatGuide = document.querySelector('.chat-guide');
     const closeChatGuide = document.getElementById('closeChatGuide');
     let isGuideVisible = false;
+    
+    // 추가 요소
+    const copyButton = document.getElementById('copy-address');
+    const categoryLinks = document.querySelectorAll('.category-list a');
+    const copyNotice = document.getElementById('copy-notice');
+
+    const profileSection = document.getElementById('profileSection');
+    const userId = document.getElementById('userId');
+
 
     // 필수 요소 확인 (모달 사용여부에 따라 guideModal, closeGuide 필요없다면 조건에서 제외 가능)
     if (!helpButton || !chatInput || !sendButton || !chatMessages || !chatGuide || !closeChatGuide) {
@@ -106,9 +115,6 @@ document.addEventListener('DOMContentLoaded', function() {
             sendMessage();
         }
     });
-
-    const profileSection = document.getElementById('profileSection');
-    const userId = document.getElementById('userId');
     let isExpanded = false;
 
     profileSection.addEventListener('click', function(e) {
@@ -131,6 +137,38 @@ document.addEventListener('DOMContentLoaded', function() {
             if (userId) userId.style.display = 'none';
         }
     });
+
+
+    // 주소 복사 기능
+    if (copyButton) {
+        copyButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            const address = copyButton.innerText.trim();
+            navigator.clipboard.writeText(address).then(() => {
+                copyNotice.style.display = 'block';
+                setTimeout(() => {
+                    copyNotice.style.display = 'none';
+                }, 2000);
+            }).catch(err => {
+                console.error('주소 복사 실패:', err);
+            });
+        });
+    }
+
+    categoryLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const fileUrl = this.href;
+            const fileName = this.getAttribute('download');
+
+            // HWP 파일 다운로드 시작
+            const anchor = document.createElement('a');
+            anchor.href = fileUrl;
+            anchor.download = fileName;
+            anchor.click();
+        });
+    });
+
 
     function updateSidebarNews() {
         const newsList = document.getElementById('newsList');
@@ -184,3 +222,4 @@ function getCSRFToken() {
     }
     return '';
 }
+

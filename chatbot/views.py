@@ -154,7 +154,7 @@ def get_google_news(request):
         feed = feedparser.parse(response.content)
         
         news_items = []
-        for entry in feed.entries[:4]:  # 최근 5개 뉴스
+        for entry in feed.entries[:3]:  # 최근 5개 뉴스
             try:
                 pub_date = datetime.strptime(entry.published, '%a, %d %b %Y %H:%M:%S %Z')
                 news_items.append({
@@ -181,7 +181,7 @@ def get_google_news(request):
 def get_news(request):
     try:
         crawler = KACCrawler()
-        count = int(request.GET.get('count', 4))
+        count = int(request.GET.get('count', 3))
         
         # press 카테고리의 뉴스를 가져옴
         news = crawler.get_notices('press', page=1, count=count)
